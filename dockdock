@@ -1,0 +1,32 @@
+FROM balenalib/raspberrypi4-64-debian-python:3.7.8
+
+
+RUN install_packages \
+	build-essential \ 
+	libssl-dev \
+	libffi-dev \
+	python-dev \
+	python-wheel \
+	gcc \
+	g++
+
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app
+
+RUN python --version
+RUN pip install -U \
+	pip \
+	setuptools
+	
+COPY prerequirements.txt ./
+RUN pip install -U --no-cache-dir -r prerequirements.txt
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# RUN ls
+COPY ./app /usr/src/app/
+
+CMD ["python", "main.py"]
+
+#####################################################################
