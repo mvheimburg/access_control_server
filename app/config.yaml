@@ -6,3 +6,13 @@ bell:
     command_topic: "bell/ring/toggle"
     # state_topic: "bell/ring/state"
     payload_toggle: "do"
+
+secrets:
+    mqtt:
+        server: 'mqtt_server_'
+        username: 'mqtt_username_'
+        password: 'mqtt_password_'
+        client_id: 'mqtt_client_id_'
+        port: 'mqtt_port_'
+    grpc:
+        port: 'grpc_port_'

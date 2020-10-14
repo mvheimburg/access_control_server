@@ -23,23 +23,30 @@ def main(mode=0):
 
     from definitions import ROOT_DIR
 
-    ### Get from config somehow #############################
-    secret_cfg_path = path.join(ROOT_DIR, "secrets.yaml")
-    with open(secret_cfg_path, 'r') as stream:
-        secret_cfg = yaml.load(stream, Loader=yaml.FullLoader)
-    print(secret_cfg)
-    server = secret_cfg['mqtt']['server']
-    uname = secret_cfg['mqtt']['username']
-    password = secret_cfg['mqtt']['password']
-    client_id = secret_cfg['mqtt']['client_id']
-    ########################################################
-
-
     cfg = None
     cfg_path = path.join(ROOT_DIR, "config.yaml")
     with open(cfg_path, 'r') as stream:
         cfg = yaml.load(stream, Loader=yaml.FullLoader)
     print(cfg)
+
+    # ### Get from config somehow #############################
+    secret_cfg_path = path.join(ROOT_DIR, "secrets.yaml")
+
+    import os.path
+    if path.isfile(secret_cfg_path):
+        with open(secret_cfg_path, 'r') as stream:
+            secret_cfg = yaml.load(stream, Loader=yaml.FullLoader)
+        print(secret_cfg)
+        server = secret_cfg['mqtt']['server']
+        uname = secret_cfg['mqtt']['username']
+        password = secret_cfg['mqtt']['password']
+        client_id = secret_cfg['mqtt']['client_id']
+    # ########################################################
+    else:
+        server = cfg['secrets']['mqtt']['server']
+        uname = cfg['secrets']['mqtt']['username']
+        password = cfg['secrets']['mqtt']['password']
+        client_id = cfg['secrets']['mqtt']['client_id']
 
     # mqttworker = MqttWorker(client_id=client_id, config=cfg)
     # mqttworker.connect_to_broker(server, uname, password)
@@ -54,7 +61,7 @@ def main(mode=0):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     mqttguide_pb2__grpc.add_MqttGuideServicer_to_server(
         mqttworker, server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:5055')
     server.start()
     server.wait_for_termination()
 
