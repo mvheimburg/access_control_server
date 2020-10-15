@@ -47,7 +47,11 @@ def main(mode=0):
         uname = cfg['secrets']['mqtt']['username']
         password = cfg['secrets']['mqtt']['password']
         client_id = cfg['secrets']['mqtt']['client_id']
-
+    
+    print(f'server is: {server}')
+    print(f'uname is: {uname}')
+    print(f'password is: {password}')
+    print(f'client_id is: {client_id}')
     # mqttworker = MqttWorker(client_id=client_id, config=cfg)
     # mqttworker.connect_to_broker(server, uname, password)
     # mqttworker.subscribe()
