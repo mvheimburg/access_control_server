@@ -9,10 +9,10 @@ bell:
 
 secrets:
     mqtt:
-        server: 'mqtt_server_'
-        username: 'mqtt_username_'
-        password: 'mqtt_password_'
-        client_id: 'mqtt_client_id_'
-        port: 'mqtt_port_'
+        server: '%%mqtt_server%%'
+        username: '%%mqtt_username%%'
+        password: '%%mqtt_password%%'
+        client_id: '%%mqtt_client_id%%'
+        port: '%%mqtt_port%%'
     grpc:
-        port: 'grpc_port_'
+        port: '%%grpc_port%%'
