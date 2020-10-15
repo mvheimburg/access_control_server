@@ -37,18 +37,20 @@ def main(mode=0):
         with open(secret_cfg_path, 'r') as stream:
             secret_cfg = yaml.load(stream, Loader=yaml.FullLoader)
         print(secret_cfg)
-        server = secret_cfg['mqtt']['server']
+        host = secret_cfg['mqtt']['server']
         uname = secret_cfg['mqtt']['username']
         password = secret_cfg['mqtt']['password']
         client_id = secret_cfg['mqtt']['client_id']
+        port = secret_cfg['mqtt']['port']
     # ########################################################
     else:
-        server = cfg['secrets']['mqtt']['server']
+        host = cfg['secrets']['mqtt']['server']
         uname = cfg['secrets']['mqtt']['username']
         password = cfg['secrets']['mqtt']['password']
         client_id = cfg['secrets']['mqtt']['client_id']
+        port = cfg['secrets']['mqtt']['port']
     
-    print(f'server is: {server}')
+    print(f'host is: {host}')
     print(f'uname is: {uname}')
     print(f'password is: {password}')
     print(f'client_id is: {client_id}')
@@ -58,7 +60,7 @@ def main(mode=0):
     # mqttworker.run()
 
     mqttworker = MqttGuideServicer(client_id=client_id, config=cfg)
-    mqttworker.connect_to_broker(server, uname, password)
+    mqttworker.connect_to_broker(host, port, uname, password)
     mqttworker.subscribe()
     mqttworker.run()
 

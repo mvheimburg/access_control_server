@@ -10,7 +10,7 @@ import urllib.parse
 class MqttWorker():
     def __init__(self, client_id=None, config=None):
         print(client_id)
-        self._mqttc = mqtt.Client(client_id)
+        self._mqttc = |.Client(client_id)
         self._config = config
         # self._lockhandler = LockActuator()
         # self._bellhandler = BellHandler(config['bell'])
@@ -53,12 +53,12 @@ class MqttWorker():
         pass
 
 
-    def connect_to_broker(self, server, username=None, password=None):
+    def connect_to_broker(self, host, port, username=None, password=None):
         print(f"connecting to server {server}")
         print(f"Username: {username}, Password: {password}")
         server_parsed = urllib.parse.urlparse(server)
         self._mqttc.username_pw_set(username, password=password)
-        self._mqttc.connect(server_parsed.hostname, port=server_parsed.port, keepalive=60)
+        self._mqttc.connect(host=host, port=port, keepalive=60)
 
 
     def subscribe(self):
