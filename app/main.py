@@ -49,7 +49,8 @@ def main(mode=0):
         password = cfg['secrets']['mqtt']['password']
         client_id = cfg['secrets']['mqtt']['client_id']
         port = cfg['secrets']['mqtt']['port']
-    
+        
+    port = int(port)
     print(f'host is: {host}')
     print(f'uname is: {uname}')
     print(f'password is: {password}')
