@@ -53,9 +53,9 @@ class MqttGuideServicer(object):
 
 
     def connect_to_broker(self, host, port, username=None, password=None):
-        print(f"connecting to server {server}")
+        print(f"connecting to host {host}")
         print(f"Username: {username}, Password: {password}")
-        server_parsed = urllib.parse.urlparse(server)
+        # server_parsed = urllib.parse.urlparse(server)
         self._mqttc.username_pw_set(username, password=password)
         self._mqttc.connect(host=host, port=port, keepalive=60)
 
