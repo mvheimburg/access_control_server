@@ -1,0 +1,19 @@
+
+syntax = "proto3";
+
+package mqttguide;
+
+service MqttGuide {
+    rpc DingDong(DingDongArgs) returns (DingDongRet) {}
+ }
+
+
+message DingDongArgs {
+}
+
+message DingDongRet {
+}
+
+// message Success{
+
+// }

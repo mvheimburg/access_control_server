@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+
+package mqttguide;
+
+service AccessControl {
+    rpc DingDong(DingDongRequest) returns (DingDongReply) {}
+ }
+
+
+message DingDongRequest {
+}
+
+message DingDongReply {
+    string message = 1;
+}
+
+// message Success{
+
+// }
