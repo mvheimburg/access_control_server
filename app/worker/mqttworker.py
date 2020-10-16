@@ -10,7 +10,7 @@ import urllib.parse
 class MqttWorker():
     def __init__(self, client_id=None, config=None):
         print(client_id)
-        self._mqttc = |.Client(client_id)
+        self._mqttc = mqtt.Client(client_id)
         self._config = config
         # self._lockhandler = LockActuator()
         # self._bellhandler = BellHandler(config['bell'])
