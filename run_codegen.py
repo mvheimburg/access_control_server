@@ -15,13 +15,13 @@
 
 from grpc_tools import protoc
 
-print('wtf')
+proto_include = protoc.pkg_resources.resource_filename('grpc_tools', '_proto')
 
-protoc.main([
-    '--python_out=/generated/py',
-    '--grpc_python_out=/generated/py',
-    '/protos/mqttguide.proto',
-])
+protoc.main((
+    __file__,
+    '--proto_path=protos',
+    '--python_out=protos/generated/py',
+    '--grpc_python_out=protos/generated/py',
+    'protos/mqttguide.proto',
+))
 
-
-if 
