@@ -1,23 +1,30 @@
+
 from time import sleep
 
+import grpc
 import paho.mqtt.client as mqtt
 import urllib.parse
+
+from worker import accesscontrol_pb2 as accesscontrol__pb2
 
 def mqtt_publish(mqtt_client, topic, payload):
     mqtt_client.publish(topic=topic, payload=payload)
 
 
 
-class MqttGuideServicer(object):
+class AccessControlServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def DingDong(self, request, context):
         """Missing associated documentation comment in .proto file."""
-        print('MQTTGuide: DingDong')
-        print(f'request is: {request}')
-        print(f'context is: {context}')
-        mqtt_publish(self._mqttc, self._config['bell']["command_topic"], payload=self._config['bell']["payload_toggle"])
 
+        print(request)
+        return_message = accesscontrol__pb2.DingDongReply(message="SERVER SIER HEI")
+        return return_message
+        
+        # context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        # context.set_details('Method not implemented!')
+        # raise NotImplementedError('Method not implemented!')
 
 
     def __init__(self, client_id=None, config=None):
@@ -77,11 +84,3 @@ class MqttGuideServicer(object):
 
         # return rc
         self._mqttc.loop_start()
-
-    def bell_ring(self):
-        print('ringing that bell')
-        self._mqttc.publish(self._config['bell']["command_topic"], payload=self._config['bell']["payload_toggle"])
-
-        #### For test purposes only. remove when HASS replace sensor with automation
-        # sleep(0.5)
-        self._mqttc.publish(self._config['bell']["command_topic"], payload=self._config['bell']["payload_off"])

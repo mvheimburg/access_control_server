@@ -18,8 +18,8 @@ def main(mode=0):
     Main function. 
     
     """
-    from worker import MqttWorker, MqttGuideServicer
-    from worker import mqttguide_pb2_grpc as mqttguide_pb2__grpc
+    from worker import AccessControlServicer
+    from worker import accesscontrol_pb2_grpc as accesscontrol_pb2_grpc_
 
     from definitions import ROOT_DIR
 
@@ -37,7 +37,7 @@ def main(mode=0):
         with open(secret_cfg_path, 'r') as stream:
             secret_cfg = yaml.load(stream, Loader=yaml.FullLoader)
         print(secret_cfg)
-        host = secret_cfg['mqtt']['server']
+        host = secret_cfg['mqtt']['host']
         uname = secret_cfg['mqtt']['username']
         password = secret_cfg['mqtt']['password']
         client_id = secret_cfg['mqtt']['client_id']
@@ -62,16 +62,18 @@ def main(mode=0):
     # mqttworker.subscribe()
     # mqttworker.run()
 
-    mqttworker = MqttGuideServicer(client_id=client_id, config=cfg)
-    mqttworker.connect_to_broker(host, port, uname, password)
-    mqttworker.subscribe()
-    mqttworker.run()
+    worker = AccessControlServicer(client_id=client_id, config=cfg)
+    # mqttworker.connect_to_broker(host, port, uname, password)
+    # mqttworker.subscribe()
+    # mqttworker.run()
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    mqttguide_pb2__grpc.add_MqttGuideServicer_to_server(
-        mqttworker, server)
+    accesscontrol_pb2_grpc_.add_AccessControlServicer_to_server(
+        worker, server)
     server.add_insecure_port('[::]:5055')
+    print("Starting GRPC server")
     server.start()
+    print("Started GRPC server")
     server.wait_for_termination()
 
 

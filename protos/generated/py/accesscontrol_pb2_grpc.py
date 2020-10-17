@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import mqttguide_pb2 as mqttguide__pb2
+import accesscontrol_pb2 as accesscontrol__pb2
 
 
-class MqttGuideStub(object):
+class AccessControlStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,13 +15,13 @@ class MqttGuideStub(object):
             channel: A grpc.Channel.
         """
         self.DingDong = channel.unary_unary(
-                '/mqttguide.MqttGuide/DingDong',
-                request_serializer=mqttguide__pb2.DingDongArgs.SerializeToString,
-                response_deserializer=mqttguide__pb2.DingDongRet.FromString,
+                '/accesscontrol.AccessControl/DingDong',
+                request_serializer=accesscontrol__pb2.DingDongRequest.SerializeToString,
+                response_deserializer=accesscontrol__pb2.DingDongReply.FromString,
                 )
 
 
-class MqttGuideServicer(object):
+class AccessControlServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def DingDong(self, request, context):
@@ -31,21 +31,21 @@ class MqttGuideServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_MqttGuideServicer_to_server(servicer, server):
+def add_AccessControlServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'DingDong': grpc.unary_unary_rpc_method_handler(
                     servicer.DingDong,
-                    request_deserializer=mqttguide__pb2.DingDongArgs.FromString,
-                    response_serializer=mqttguide__pb2.DingDongRet.SerializeToString,
+                    request_deserializer=accesscontrol__pb2.DingDongRequest.FromString,
+                    response_serializer=accesscontrol__pb2.DingDongReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'mqttguide.MqttGuide', rpc_method_handlers)
+            'accesscontrol.AccessControl', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class MqttGuide(object):
+class AccessControl(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -59,8 +59,8 @@ class MqttGuide(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/mqttguide.MqttGuide/DingDong',
-            mqttguide__pb2.DingDongArgs.SerializeToString,
-            mqttguide__pb2.DingDongRet.FromString,
+        return grpc.experimental.unary_unary(request, target, '/accesscontrol.AccessControl/DingDong',
+            accesscontrol__pb2.DingDongRequest.SerializeToString,
+            accesscontrol__pb2.DingDongReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

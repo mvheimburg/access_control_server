@@ -22,6 +22,6 @@ protoc.main((
     '--proto_path=protos',
     '--python_out=protos/generated/py',
     '--grpc_python_out=protos/generated/py',
-    'protos/mqttguide.proto',
+    'protos/accesscontrol.proto',
 ))
 
