@@ -11,7 +11,6 @@ import flask
 from flask import request, jsonify
 from flask_cors import CORS
 
-import grpc
 import yaml
 
 from pythonpath import add_dir_to_pythonpath
