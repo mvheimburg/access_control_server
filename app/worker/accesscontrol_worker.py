@@ -1,7 +1,6 @@
 
 from time import sleep
 
-import grpc
 import paho.mqtt.client as mqtt
 import urllib.parse
 
