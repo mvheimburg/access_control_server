@@ -1,1 +1,1 @@
-from .accesscontrol_worker import AccessControlServicer
+from .accesscontrol_worker import AccessControlWorker

@@ -5,21 +5,19 @@ import grpc
 import paho.mqtt.client as mqtt
 import urllib.parse
 
-from worker import accesscontrol_pb2 as accesscontrol__pb2
 
 def mqtt_publish(mqtt_client, topic, payload):
     mqtt_client.publish(topic=topic, payload=payload)
 
 
 
-class AccessControlServicer(object):
+class AccessControlWorker(object):
     """Missing associated documentation comment in .proto file."""
 
-    def DingDong(self, request, context):
+    def DingDong(self, request):
         """Missing associated documentation comment in .proto file."""
-
         print(request)
-        return_message = accesscontrol__pb2.DingDongReply(message="SERVER SIER HEI")
+        return_message = 'balle'
         return return_message
         
         # context.set_code(grpc.StatusCode.UNIMPLEMENTED)

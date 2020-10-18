@@ -1,4 +1,4 @@
 paho-mqtt
 PyYAML
-grpcio
-grpcio_tools
+flask
+flask_cors
