@@ -112,8 +112,3 @@ def api_id():
     # Use the jsonify function from Flask to convert our list of
     # Python dictionaries to the JSON format.
     return jsonify(results)
-    
-
-
-if __name__ == "__main__":
-    pass
